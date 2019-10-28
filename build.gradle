@@ -1,0 +1,74 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group 'app.aplan.burden'
+version '0.0.1'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.slf4j:slf4j-api:1.7.28'
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.9.5'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.9.5'
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.9.5'
+    implementation 'com.google.guava:guava:28.1-jre'
+    testImplementation 'org.slf4j:jcl-over-slf4j:1.7.28'
+    testImplementation 'ch.qos.logback:logback-classic:1.2.3'
+    testImplementation 'ch.qos.logback:logback-core:1.2.3'
+    // Use JUnit Jupiter API for testing.
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.5.2'
+    // Use JUnit Jupiter Engine for testing.
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.5.2'
+}
+
+task copyDependencies(type: Copy) {
+    from configurations.implementation
+    into 'build/dependencies'
+}
+
+application {
+    // Define the main class for the application
+    mainClassName = 'app.aplan.burden.App'
+    description = 'none'
+
+    jar {
+        configurations.implementation.setCanBeResolved(true)
+        ext.createAttributes = { ->
+            def attributes = [
+                    'Manifest-Version'      : 1.0,
+                    'Implementation-Title'  : project.name,
+                    'Implementation-Version': version,
+                    'Main-Class'            : mainClassName,
+                    'Class-Path'            : configurations.implementation.collect {
+                        "./${it.getName()}"
+                    }.sort().join(' '),
+                    'Description'           : description,
+                    'Created-By'            : "Gradle $gradle.gradleVersion",
+                    'Build-Jdk'             : project.ant.properties.get('java.version'),
+                    'Class-Version'         : project.ant.properties.get('java.class.version'),
+            ]
+
+            try {
+                attributes.putAll([
+                        'Commit-By' : "${grgit.head().author.name} <${grgit.head().author.email}>",
+                        'Git-Commit': grgit.head().id,
+                        'Git-Branch': grgit.branch.current().fullName,
+                ])
+                if (grgit.remote.list().size() > 0) {
+                    attributes.put('Implementation-URL', grgit.remote.list()[0].url)
+                }
+            } catch (ignored) {
+            }
+            return attributes
+        }
+        manifest {
+            attributes(createAttributes())
+        }
+    }
+}

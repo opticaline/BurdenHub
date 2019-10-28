@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?language javascript?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:id="mainPanel"
+      fx:controller="app.aplan.burden.controller.DashboardController">
+    <MenuBar>
+        <Menu text="File">
+            <MenuItem text="Close"/>
+        </Menu>
+        <Menu text="Feature">
+            <MenuItem text="Windows Firewall" onAction="#openFirewallPanel"/>
+        </Menu>
+    </MenuBar>
+</VBox>

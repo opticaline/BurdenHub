@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?language javascript?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import java.net.URL?>
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="app.aplan.burden.controller.FirewallController">
+    <HBox>
+        <ComboBox fx:id="listenAddress" promptText="Listen Address"/>
+        <TextField fx:id="listenPort" promptText="Listen Port"/>
+        <ComboBox fx:id="connectAddress" promptText="Connect Address" editable="true"/>
+        <TextField fx:id="connectPort" promptText="Connect Port"/>
+    </HBox>
+    <Button text="Create" fx:id="create"/>
+    <TableView fx:id="table" editable="true">
+        <columns>
+            <!--
+                    <TableColumn text="Select">
+                        <cellFactory>
+                            <CheckBoxCellFactory/>
+                        </cellFactory>
+                    </TableColumn>
+            -->
+            <TableColumn text="Listen Address">
+                <cellValueFactory>
+                    <PropertyValueFactory property="listenAddress"/>
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn text="Listen Port">
+                <cellValueFactory>
+                    <PropertyValueFactory property="listenPort"/>
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn text="Connect Address">
+                <cellValueFactory>
+                    <PropertyValueFactory property="connectAddress"/>
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn text="Connect Port">
+                <cellValueFactory>
+                    <PropertyValueFactory property="connectPort"/>
+                </cellValueFactory>
+            </TableColumn>
+        </columns>
+    </TableView>
+    <HBox>
+        <ComboBox fx:id="disabled" promptText="Disabled Proxy"/>
+        <Button fx:id="enable" text="Enable"/>
+    </HBox>
+    <stylesheets>
+        <URL value="@firewall.css"/>
+    </stylesheets>
+</VBox>
