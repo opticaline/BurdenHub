@@ -2,8 +2,6 @@ package app.aplan.burden.entity;
 
 import org.slf4j.helpers.MessageFormatter;
 
-import java.text.MessageFormat;
-
 public class PortForward {
     private String listenAddress;
     private int listenPort;

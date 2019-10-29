@@ -12,6 +12,7 @@
             <MenuItem text="Close"/>
         </Menu>
         <Menu text="Feature">
+            <MenuItem text="Scripts" onAction="#openScriptsPanel"/>
             <MenuItem text="Windows Firewall" onAction="#openFirewallPanel"/>
         </Menu>
     </MenuBar>

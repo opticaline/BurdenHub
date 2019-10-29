@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?language javascript?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.TextFlow?>
+<VBox xmlns:fx="http://javafx.com/fxml"
+      xmlns="http://javafx.com/javafx"
+      fx:controller="app.aplan.burden.controller.ScriptsController">
+    <ScrollPane fx:id="consoleScroll" fitToWidth="true">
+        <TextFlow fx:id="console" prefHeight="150"/>
+    </ScrollPane>
+    <TitledPane collapsible="false" text="Android adb">
+        <VBox>
+            <HBox>
+                <Button fx:id="connect" text="Connect" onAction="#connect"/>
+            </HBox>
+            <HBox>
+                <Button fx:id="disconnect" text="Disconnect"/>
+            </HBox>
+            <HBox>
+                <Button fx:id="shell" text="Shell"/>
+            </HBox>
+        </VBox>
+    </TitledPane>
+    <TitledPane collapsible="false" text="Custom">
+        <GridPane fx:id="custom"/>
+    </TitledPane>
+</VBox>
