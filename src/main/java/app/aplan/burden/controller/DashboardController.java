@@ -3,6 +3,7 @@ package app.aplan.burden.controller;
 import app.aplan.burden.App;
 import app.aplan.burden.Utils;
 import com.google.common.base.Strings;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -48,5 +49,9 @@ public class DashboardController implements Initializable {
 
     private void clear() {
         mainPanel.getChildren().remove(1, mainPanel.getChildren().size());
+    }
+
+    public void close(ActionEvent actionEvent) {
+        Platform.exit();
     }
 }
