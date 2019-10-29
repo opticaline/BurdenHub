@@ -1,7 +1,6 @@
 package app.aplan.burden.service;
 
 import app.aplan.burden.Utils;
-import app.aplan.burden.config.Configuration;
 import app.aplan.burden.entity.PortForward;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -20,6 +19,8 @@ import java.net.SocketException;
 import java.util.*;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+
+import static app.aplan.burden.App.configuration;
 
 public class PortForwardService {
     private static final Logger logger = LoggerFactory.getLogger(PortForwardService.class);
@@ -75,14 +76,12 @@ public class PortForwardService {
     }
 
     public void enable(PortForward pf) {
-        Configuration configuration = Utils.readConfig();
         configuration.getDisabled().removeIf((Predicate<PortForward>) input -> Objects.requireNonNull(input).toString().equals(pf.toString()));
         Utils.writeConfig(configuration);
         logger.info("Enable v4tov4 proxy {}", pf);
     }
 
     public void disable(PortForward pf) {
-        Configuration configuration = Utils.readConfig();
         configuration.getDisabled().add(pf);
         Utils.writeConfig(configuration);
         logger.info("Disabled v4tov4 proxy {}", pf);

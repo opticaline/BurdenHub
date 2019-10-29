@@ -1,5 +1,6 @@
 package app.aplan.burden;
 
+import app.aplan.burden.config.Configuration;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,6 +11,7 @@ import java.io.IOException;
 import java.net.URL;
 
 public class App extends Application {
+    public static Configuration configuration = Utils.readConfig();
 
     public static void main(String[] args) {
         launch(args);
