@@ -9,22 +9,23 @@
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="app.aplan.burden.controller.FirewallController">
-    <HBox>
-        <ComboBox fx:id="listenAddress" promptText="Listen Address"/>
-        <TextField fx:id="listenPort" promptText="Listen Port"/>
-        <ComboBox fx:id="connectAddress" promptText="Connect Address" editable="true"/>
-        <TextField fx:id="connectPort" promptText="Connect Port"/>
-    </HBox>
-    <Button text="Create" fx:id="create"/>
+    <TitledPane collapsible="false" text="Create New Proxy">
+        <HBox>
+            <ComboBox fx:id="listenAddress" promptText="Listen Address"/>
+            <TextField fx:id="listenPort" promptText="Listen Port"/>
+            <ComboBox fx:id="connectAddress" promptText="Connect Address" editable="true"/>
+            <TextField fx:id="connectPort" promptText="Connect Port"/>
+            <Button text="Create" fx:id="create"/>
+        </HBox>
+    </TitledPane>
+    <TitledPane collapsible="false" text="Disabled Proxies">
+        <HBox>
+            <ComboBox fx:id="disabled" promptText="Disabled Proxy"/>
+            <Button fx:id="enable" text="Enable"/>
+        </HBox>
+    </TitledPane>
     <TableView fx:id="table" editable="true">
         <columns>
-            <!--
-                    <TableColumn text="Select">
-                        <cellFactory>
-                            <CheckBoxCellFactory/>
-                        </cellFactory>
-                    </TableColumn>
-            -->
             <TableColumn text="Listen Address">
                 <cellValueFactory>
                     <PropertyValueFactory property="listenAddress"/>
@@ -47,10 +48,6 @@
             </TableColumn>
         </columns>
     </TableView>
-    <HBox>
-        <ComboBox fx:id="disabled" promptText="Disabled Proxy"/>
-        <Button fx:id="enable" text="Enable"/>
-    </HBox>
     <stylesheets>
         <URL value="@firewall.css"/>
     </stylesheets>

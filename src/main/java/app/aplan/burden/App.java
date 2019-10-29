@@ -18,8 +18,8 @@ public class App extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         primaryStage.setTitle("Dashboard");
-        primaryStage.setWidth(800);
-        primaryStage.setHeight(600);
+        primaryStage.setWidth(1366);
+        primaryStage.setHeight(768);
 
 /*
         InputStream iconStream = getClass().getResourceAsStream("/icon.png");
