@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
@@ -94,7 +95,9 @@ public class PortForwardService {
             nets = NetworkInterface.getNetworkInterfaces();
             for (NetworkInterface netint : Collections.list(nets)) {
                 for (InetAddress ia : Collections.list(netint.getInetAddresses())) {
-                    ans.add(ia.getHostAddress());
+                    if (ia instanceof Inet4Address) {
+                        ans.add(ia.getHostAddress());
+                    }
                 }
             }
         } catch (SocketException e) {

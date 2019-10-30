@@ -6,6 +6,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import jfxtras.styles.jmetro.JMetro;
+import jfxtras.styles.jmetro.Style;
 
 import java.io.IOException;
 import java.net.URL;
@@ -30,6 +32,7 @@ public class App extends Application {
 */
 
         primaryStage.setScene(new Scene(loadFromFxml("/dashboard.fxml")));
+        new JMetro(primaryStage.getScene(), Style.LIGHT);
         primaryStage.show();
     }
 

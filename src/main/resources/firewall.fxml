@@ -12,16 +12,21 @@
     <TitledPane collapsible="false" text="Create New Proxy">
         <HBox>
             <ComboBox fx:id="listenAddress" promptText="Listen Address"/>
+            <Separator orientation="VERTICAL" prefHeight="0.0" prefWidth="8.0"/>
             <TextField fx:id="listenPort" promptText="Listen Port"/>
+            <Separator orientation="VERTICAL" prefHeight="0.0" prefWidth="8.0"/>
             <ComboBox fx:id="connectAddress" promptText="Connect Address" editable="true"/>
+            <Separator orientation="VERTICAL" prefHeight="0.0" prefWidth="8.0"/>
             <TextField fx:id="connectPort" promptText="Connect Port"/>
+            <Separator orientation="VERTICAL" prefHeight="0.0" prefWidth="8.0"/>
             <Button text="Create" fx:id="create"/>
         </HBox>
     </TitledPane>
     <TitledPane collapsible="false" text="Disabled Proxies">
         <HBox>
-            <ComboBox fx:id="disabled" promptText="Disabled Proxy"/>
-            <Button fx:id="enable" text="Enable"/>
+            <ComboBox fx:id="disabled" promptText="Disabled Proxy" disable="true"/>
+            <Separator orientation="VERTICAL" prefHeight="0.0" prefWidth="8.0"/>
+            <Button fx:id="enable" text="Enable" disable="true"/>
         </HBox>
     </TitledPane>
     <TableView fx:id="table" editable="true">

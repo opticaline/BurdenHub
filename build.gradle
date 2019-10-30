@@ -10,6 +10,9 @@ sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
+    maven {
+        url 'https://jcenter.bintray.com'
+    }
 }
 
 dependencies {
@@ -18,6 +21,8 @@ dependencies {
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.9.5'
     implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.9.5'
     implementation 'com.google.guava:guava:28.1-jre'
+    implementation 'org.jfxtras:jmetro:8.5.11'
+    implementation 'org.controlsfx:controlsfx:8.40.14'
     testImplementation 'org.slf4j:jcl-over-slf4j:1.7.28'
     testImplementation 'ch.qos.logback:logback-classic:1.2.3'
     testImplementation 'ch.qos.logback:logback-core:1.2.3'

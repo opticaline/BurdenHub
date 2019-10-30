@@ -1,5 +1,15 @@
 .text-field {
+    -fx-pref-height: 33px;
+    -fx-min-height: 33px;
+    -fx-max-height: 33px;
+}
+
+.combo-box {
+    -fx-pref-height: 33px;
+    -fx-min-height: 33px;
+    -fx-max-height: 33px;
 }
 
 .text-field:focused {
 }
+

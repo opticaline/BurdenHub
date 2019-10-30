@@ -3,12 +3,12 @@ package app.aplan.burden.controller;
 import app.aplan.burden.entity.PortForward;
 import app.aplan.burden.service.PortForwardService;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 import java.net.URL;
@@ -35,43 +35,8 @@ public class FirewallController implements Initializable {
         table.setItems(pfService.getPortForwards());
         table.refresh();
         initMenu();
-        ObservableList<String> address = FXCollections.observableArrayList(pfService.getAddress());
-        listenAddress.setItems(address);
-        connectAddress.setItems(address);
-        create.setOnAction(event -> {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Information Dialog");
-            alert.setHeaderText(null);
-            alert.setContentText("Create this proxy?");
-            Optional<ButtonType> result = alert.showAndWait();
-            if (result.get() == ButtonType.OK) {
-                PortForward pf = new PortForward();
-                pf.setListenAddress(listenAddress.getValue());
-                pf.setListenPort(Integer.parseInt(listenPort.getText()));
-                pf.setConnectAddress(connectAddress.getValue());
-                pf.setConnectPort(Integer.parseInt(connectPort.getText()));
-                try {
-                    pfService.create(pf);
-                    table.getItems().add(pf);
-                    table.refresh();
-                } catch (IOException | InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        disabled.setItems(FXCollections.observableArrayList(pfService.loadDisabledProxy()));
-        enable.setOnAction(event -> {
-            PortForward pf = disabled.getSelectionModel().getSelectedItem();
-            pfService.enable(pf);
-            disabled.getItems().remove(pf);
-            try {
-                pfService.create(pf);
-                table.getItems().add(pf);
-                table.refresh();
-            } catch (IOException | InterruptedException e) {
-                e.printStackTrace();
-            }
-        });
+        initCreate();
+        initDisable();
     }
 
     private void initMenu() {
@@ -96,10 +61,62 @@ public class FirewallController implements Initializable {
         });
         cm.getItems().add(disable);
 
-        table.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-            if (event.getButton() == MouseButton.SECONDARY && table.getSelectionModel().getSelectedItem() != null) {
-                cm.show(table, event.getScreenX(), event.getScreenY());
+        table.setRowFactory(param -> {
+            TableRow<PortForward> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                PortForward pf = row.getItem();
+                if (event.getButton() == MouseButton.SECONDARY && pf != null) {
+                    cm.show(table, event.getScreenX(), event.getScreenY());
+                } else {
+                    cm.hide();
+                }
+            });
+            return row;
+        });
+    }
+
+    private void initCreate() {
+        ObservableList<String> address = FXCollections.observableArrayList(pfService.getAddress());
+        listenAddress.setItems(address);
+        connectAddress.setItems(address);
+        create.setOnAction(event -> {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Information Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("Create this proxy?");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                PortForward pf = new PortForward();
+                pf.setListenAddress(listenAddress.getValue());
+                pf.setListenPort(Integer.parseInt(listenPort.getText()));
+                pf.setConnectAddress(connectAddress.getValue());
+                pf.setConnectPort(Integer.parseInt(connectPort.getText()));
+                try {
+                    pfService.create(pf);
+                    table.getItems().add(pf);
+                    table.refresh();
+                } catch (IOException | InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         });
+    }
+
+    private void initDisable() {
+        disabled.setItems(FXCollections.observableArrayList(pfService.loadDisabledProxy()));
+        enable.setOnAction(event -> {
+            PortForward pf = disabled.getSelectionModel().getSelectedItem();
+            pfService.enable(pf);
+            disabled.getItems().remove(pf);
+            try {
+                pfService.create(pf);
+                table.getItems().add(pf);
+                table.refresh();
+            } catch (IOException | InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+        disabled.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> enable.setDisable(newValue == null));
+        disabled.getItems().addListener((ListChangeListener<PortForward>) c -> disabled.setDisable(c.getList().size() == 0));
     }
 }
