@@ -7,6 +7,7 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.MenuItem;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
@@ -18,6 +19,7 @@ import static app.aplan.burden.App.configuration;
 public class DashboardController implements Initializable {
     @FXML
     public VBox mainPanel;
+    public MenuItem windowsProxies;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -27,6 +29,9 @@ public class DashboardController implements Initializable {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+        if (Utils.isWindows()) {
+            windowsProxies.setDisable(false);
         }
     }
 

@@ -81,8 +81,16 @@ public class Utils {
         return userDirectory().resolve("scripts");
     }
 
+    public static String os() {
+        return System.getProperty("os.name");
+    }
+
+    public static boolean isWindows() {
+        return os().startsWith("Windows");
+    }
+
     public static String scriptSuffix() {
-        if (System.getProperty("os.name").startsWith("Windows")) {
+        if (isWindows()) {
             return "bat";
         } else {
             return "sh";

@@ -13,7 +13,7 @@
         </Menu>
         <Menu text="%feature">
             <MenuItem text="%scripts" onAction="#openScriptsPanel"/>
-            <MenuItem text="%windows-proxies" onAction="#openFirewallPanel"/>
+            <MenuItem fx:id="windowsProxies" text="%windows-proxies" onAction="#openFirewallPanel" disable="true"/>
         </Menu>
     </MenuBar>
 </VBox>
