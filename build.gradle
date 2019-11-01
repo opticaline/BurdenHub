@@ -38,6 +38,10 @@ task copyDependencies(type: Copy) {
     into 'build/dependencies'
 }
 
+wrapper {
+    gradleVersion = '5.2.1'
+}
+
 application {
     // Define the main class for the application
     mainClassName = 'app.aplan.burden.App'
