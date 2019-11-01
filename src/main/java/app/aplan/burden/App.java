@@ -11,6 +11,8 @@ import jfxtras.styles.jmetro.Style;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class App extends Application {
     public static Configuration configuration = Utils.readConfig();
@@ -38,6 +40,7 @@ public class App extends Application {
 
     public static Parent loadFromFxml(String fxml) throws IOException {
         FXMLLoader loader = new FXMLLoader();
+        loader.setResources(ResourceBundle.getBundle("bundles.language", new Locale("cn", "CN")));
         URL xmlUrl = App.class.getResource(fxml);
         loader.setLocation(xmlUrl);
         return loader.load();

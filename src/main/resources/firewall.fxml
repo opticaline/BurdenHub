@@ -9,44 +9,44 @@
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="app.aplan.burden.controller.FirewallController">
-    <TitledPane collapsible="false" text="Create New Proxy">
+    <TitledPane collapsible="false" text="%create-new-proxy">
         <HBox>
-            <ComboBox fx:id="listenAddress" promptText="Listen Address"/>
+            <ComboBox fx:id="listenAddress" promptText="%listen-address"/>
             <Separator orientation="VERTICAL" prefHeight="0.0" prefWidth="8.0"/>
-            <TextField fx:id="listenPort" promptText="Listen Port"/>
+            <TextField fx:id="listenPort" promptText="%listen-port"/>
             <Separator orientation="VERTICAL" prefHeight="0.0" prefWidth="8.0"/>
-            <ComboBox fx:id="connectAddress" promptText="Connect Address" editable="true"/>
+            <ComboBox fx:id="connectAddress" promptText="%connect-address" editable="true"/>
             <Separator orientation="VERTICAL" prefHeight="0.0" prefWidth="8.0"/>
-            <TextField fx:id="connectPort" promptText="Connect Port"/>
+            <TextField fx:id="connectPort" promptText="%connect-port"/>
             <Separator orientation="VERTICAL" prefHeight="0.0" prefWidth="8.0"/>
-            <Button text="Create" fx:id="create"/>
+            <Button text="%create" fx:id="create"/>
         </HBox>
     </TitledPane>
-    <TitledPane collapsible="false" text="Disabled Proxies">
+    <TitledPane collapsible="false" text="%disabled-proxies">
         <HBox>
-            <ComboBox fx:id="disabled" promptText="Disabled Proxy" disable="true"/>
+            <ComboBox fx:id="disabled" promptText="%disabled-proxy" disable="true"/>
             <Separator orientation="VERTICAL" prefHeight="0.0" prefWidth="8.0"/>
-            <Button fx:id="enable" text="Enable" disable="true"/>
+            <Button fx:id="enable" text="%enable" disable="true"/>
         </HBox>
     </TitledPane>
     <TableView fx:id="table" editable="true">
         <columns>
-            <TableColumn text="Listen Address">
+            <TableColumn text="%listen-address">
                 <cellValueFactory>
                     <PropertyValueFactory property="listenAddress"/>
                 </cellValueFactory>
             </TableColumn>
-            <TableColumn text="Listen Port">
+            <TableColumn text="%listen-port">
                 <cellValueFactory>
                     <PropertyValueFactory property="listenPort"/>
                 </cellValueFactory>
             </TableColumn>
-            <TableColumn text="Connect Address">
+            <TableColumn text="%connect-address">
                 <cellValueFactory>
                     <PropertyValueFactory property="connectAddress"/>
                 </cellValueFactory>
             </TableColumn>
-            <TableColumn text="Connect Port">
+            <TableColumn text="%connect-port">
                 <cellValueFactory>
                     <PropertyValueFactory property="connectPort"/>
                 </cellValueFactory>
