@@ -51,9 +51,6 @@ application {
                     'Implementation-Title'  : project.name,
                     'Implementation-Version': version,
                     'Main-Class'            : mainClassName,
-                    'Class-Path'            : configurations.implementation.collect {
-                        "./${it.getName()}"
-                    }.sort().join(' '),
                     'Description'           : description,
                     'Created-By'            : "Gradle $gradle.gradleVersion",
                     'Build-Jdk'             : project.ant.properties.get('java.version'),
